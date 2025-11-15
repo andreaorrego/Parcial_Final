@@ -1,24 +1,15 @@
-from Model.hospital import hospital
-from Model.doctor import doctor
+import sys, os
+sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), '..')))
 
-class controller_hospital():
-    def __init__ (self):
-        self.__Hospital = hospital("Hospital San Jorge")
+from Model.hospital import Hospital
+from Model.CRUD_doctor import CRUD_doctor
 
-        self.Hospital.agregar_doctor (doctor ("Ana Perez", "Cardiologia", 1001))
-        self.Hospital.agregar_doctor (doctor ("Luis Gomez", "Pediatria", 1002))
-        self.Hospital.agregar_doctor (doctor ("Carlos Ruiz", "Neurologia", 1003))
+class Controller:
+    def __init__(self):
+        self.crud_doctor = CRUD_doctor()
+        self.hospitales = {} 
 
-    def search_by_dni (self, dni):
-        Doctor = self.Hospital.buscar_dni (dni)
-        if Doctor:
-            return {
-                "Doctor: ":{
-                    "Nombre: ": Doctor.doctor_name,
-                    "Especialidad: ": Doctor.speciality,
-                    "DNI: ": Doctor.dni
-                },
-                "Hospital: ": {
-                    "Nombre: ": self.Hospital.hospital_name
-                }
-            }
+    def obtener_hospital(self, hospital_name):
+        if hospital_name not in self.hospitales:
+            self.hospitales[hospital_name] = Hospital(hospital_name)
+        return self.hospitales[hospital_name]

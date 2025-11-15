@@ -1,6 +1,10 @@
-from doctor import doctor
+import sys, os
+sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), '..')))
 
-class hospital():
+from Model.doctor import Doctor
+
+class Hospital():
+    
     def __init__(self, hospital_name):
         self.__hospital_name = hospital_name
         self.__doctores = []
@@ -18,23 +22,12 @@ class hospital():
     @property
     def doctores(self):
         return self.__doctores
-    
-    @doctores.setter
-    def doctores(self, valor):
-        self.__doctor.append(doctor)
 
     def agregar_doctores(self, doctor):
-        self.__doctores = doctor
+        self.__doctores.append(doctor)
 
     def __str__ (self):
-        cadena = "Nombre del Hospital: {}".format(self.__hospital_name)
-        return cadena
-"""
-    def buscar_dni (self, dni):
-        for doc in self.__doctores:
-            if doc.dni == dni:
-                return doc
-            return None 
-        """
-    
+        return f"Hospital: {self.__hospital_name}"
+        
+
     
